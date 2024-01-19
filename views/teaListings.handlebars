@@ -1,0 +1,38 @@
+{{!-- Template for tea product listing e.g., the formal page for user to view all the details of a single product. --}}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300..700&display=swap" rel="stylesheet">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet"> 
+
+    <link rel="stylesheet" href="/public/css/style.css">
+
+    <title>Flower & Moon Tea</title>
+</head>
+<body>
+    {{#with teaDetails}}
+    <div class="container">
+        <h1>{{name}}</h1>
+        <img src="{{imageUrl}}" alt="{{name}}" style="max-width: 100%; height: auto;">
+        <p>{{description}}</p>
+        <p>Price: ${{price}}</p>
+        <button onclick="addToCart('{{id}}')">Add to cart</button>
+    </div>
+    {{/with}}
+    <script>
+        function addToCart(id) {
+            // TODO: Add logic to open a user's cart page when they click on an 'Add to cart' button on a product listing.
+            alert(id + ' added to cart');
+        }
+    </script>
+</body>
+</html>
