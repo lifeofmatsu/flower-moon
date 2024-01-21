@@ -1,3 +1,9 @@
+:root {
+    --lightBase: #faf4ed;
+    --lightText: #575279;
+    --lightSubtleAccent: #c2c2c2;
+}
+
 /* 
 ===============
 GENERAL STYLING
@@ -10,15 +16,15 @@ html {
 }
 
 body {
-    background-color: #fff;
-    color: #0a0a0a;
+    background-color: var(--lightBase);
+    color: var(--lightText);
     font-family: "Comfortaa", sans-serif;
     height: 100%;
     line-height: 1.5;
 }
 
 h1, h2, h3, h4, h5, h6 {
-    color: #0a0a0a;
+    color: var(--lightText);
     font-weight: 700;
     text-decoration: none;
 }
@@ -40,12 +46,11 @@ h3 {
 }
 
 p {
-    font-size: 1.25rem;
-    font-weight: 300;
     margin: 1em 0;
 }
 
-a {
+p, a {
+    color: var(--lightText);
     font-size: 1.5rem;
     font-weight: 300;
 }
@@ -63,8 +68,8 @@ HEADER NAVIGATION
     position: relative;
 }
 
-.w-bottom-line {
-    border-bottom: 1px solid #c2c2c2;
+.with-bottom-line {
+    border-bottom: 1px solid var(--lightSubtleAccent);
 }
 
 .header-grid {
@@ -82,14 +87,16 @@ HEADER NAVIGATION
 .header-grid--brand__item {
     margin: auto;
     padding: 20px 0;
+
 }
 
 .header-grid--brand__item 
 .header-grid--brand__link {
-    color: #0a0a0a;
-    font-size: 3.5rem;
+    color: var(--lightText);
+    font-size: 3.75rem;
     font-weight: 700;
     text-decoration: none;
+    letter-spacing: 5px;
 }
 
 .header-grid--nav {
@@ -115,10 +122,11 @@ HEADER NAVIGATION
 
 .nav-pane__item 
 .nav-pane__link {
-    color: #0a0a0a;
+    color: var(--lightText);
     font-size: 1.75rem;
     font-weight: 700;
     text-decoration: none;
+    letter-spacing: 1px;
 }
 
 .header-grid--icons {
@@ -139,12 +147,17 @@ HEADER NAVIGATION
     display: flex;
     align-self: center;
     justify-content: space-evenly;
-    color: #0a0a0a;
+    color: var(--lightText);
     padding: 20px;
     white-space: nowrap;
 }
 
-/* Responsive behavior */
+/* 
+=================
+RESPONSIVE DESIGN
+=================
+*/
+
 @media (max-width: 1200px) {
     .nav-pane {
         grid-template-columns: repeat(5, 1fr);
