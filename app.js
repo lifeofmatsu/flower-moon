@@ -6,7 +6,7 @@ const path = require('path');
 const app = express();
 
 // Set up Handlebars
-app.engine('handlebars', exphbs());
+app.engine('handlebars', exphbs.engine());
 app.set('view engine', 'handlebars');
 app.set('views', path.join(__dirname, 'views'));
 
@@ -15,7 +15,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 // Define a route to render the home page
 app.get('/', (req, res) => {
-    res.render('home'); // Assuming you have a 'home.handlebars' in your 'views/' directory
+    res.render('home');
 });
 
 // Start the server
