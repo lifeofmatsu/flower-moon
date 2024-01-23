@@ -1,0 +1,5 @@
+-- DROP DATABASE
+DROP DATABASE IF EXISTS tea-ecommerce_db;
+
+-- CREATE DATABASE
+CREATE DATABASE tea-ecommerce_db;
