@@ -1,6 +1,7 @@
 // seeds/teaCategories.js
+const { Category } = require('../models');
 
-const teaCategories = [
+const categoryData = [
     {
       name: "Green Tea",
       description: "Fresh and light teas with minimal oxidation",
@@ -33,6 +34,8 @@ const teaCategories = [
     },
    
   ];
-  
+  const teaCategories = () => Category.bulkCreate(categoryData);
+
+
   module.exports = teaCategories;
   
