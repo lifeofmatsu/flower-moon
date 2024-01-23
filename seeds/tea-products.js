@@ -1,6 +1,8 @@
 // seeds/teaProducts.js
 
-const teaProducts = [
+const { Product } = require('../models');
+
+const productData = [
     {
       productId: 1,
       name: "Dragon Well Green Tea",
@@ -58,6 +60,8 @@ const teaProducts = [
    
   ];
   
+  const teaProducts = () => Product.bulkCreate(productData);
+
   module.exports = teaProducts;
   
   
