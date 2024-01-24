@@ -1,6 +1,6 @@
 const User = require('./User');
 const Cart = require('./Cart');
-const Item = require('./Item');
+const Tea = require('./Tea');
 const Orders = require('./Orders');
 const CartItem = require('./CartItem');
 const OrderItem = require('./OrderItem');
@@ -12,7 +12,7 @@ const OrderItem = require('./OrderItem');
 module.exports = {
     User,
     Cart,
-    Item,
+    Tea,
     Orders,
     CartItem,
     OrderItem,
