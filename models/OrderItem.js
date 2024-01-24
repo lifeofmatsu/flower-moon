@@ -17,10 +17,10 @@ OrderItem.init(
             primaryKey: false,
             autoIncrement: false,
         },
-        itemId: {
+        teaId: {
             type: DataTypes.INTEGER,
             references: {
-                model: 'item',
+                model: 'tea',
                 key: 'id',
             },
         },
