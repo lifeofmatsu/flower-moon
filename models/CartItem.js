@@ -24,10 +24,10 @@ CartItem.init(
                 key: 'id',
             },
         },
-        itemId: {
+        teaId: {
             type: DataTypes.INTEGER,
             references: {
-                model: 'item',
+                model: 'tea',
                 key: 'id',
             },
         },
