@@ -1,12 +1,13 @@
 const router = require('express').Router();
-const { tea } = require('../models');
+const { Tea, Cart, CartItem, Orders, Orderitem } = require('../models');
 
 router.get('/', async (req, res) => {
     try {
-        const blankData = await tea.findAll({
-            include: [{}],
+        const teaData = await Tea.findAll({
+            include: [ Cart, { model: Orders, through: CartItem }]
         });
-        res.status(200).json(blankData);
+        
+        res.status(200).json(teaData);
     } catch (err) {
         res.status(500).json(err);
     }
@@ -14,16 +15,19 @@ router.get('/', async (req, res) => {
 
 router.get('/tea/:id', async (req, res) => {
     try {
-        const blankData = await tea.findByPk(req.params.id, {
-            include: [{}],
+        const teaData = await Tea.findByPk(req.params.id, {
+            include: [ Cart, { model: Orders, through: CartItem }]
         });
-        if (!blankData) {
+        if (teaData) {
+            res.render('TeaPage', Tea.get({ plain: true }));
+        } else
+        if (!teaData) {
             res.status(404).json({ 
-              message: 'There is no tea with this ID.'
-            });
+            message: 'There is no tea with this ID.'
+        });
             return;
-          }
-        res.status(200).json(blankData);
+        }
+        res.status(200).json(teaData);
     } catch (err) {
         res.status(500).json(err);
     }
@@ -31,46 +35,8 @@ router.get('/tea/:id', async (req, res) => {
 
 router.post('/', async (req, res) => {
     try {
-      const blankData = await tea.create();
-      res.status(200).json(blankData);
-    } catch (err) {
-      res.status(500).json(err);
-    }
-});
-
-router.put('/:id', async (req, res) => {
-    try {
-      const blankData = await Tag.update(req.body, {
-        where: {
-          id: req.params.id
-        }
-      });    
-      if (!blankData) {
-        res.status(404).json({ 
-          message: 'No tea exist with current ID'
-        });
-        return;
-      }
-      res.status(200).json(blankData);
-    } catch (err) {
-      res.status(500).json(err);
-    }
-});
-
-router.delete('/:id', async (req, res) => {
-    try {
-      const blankData = await Category.destroy({
-        where: {
-          id: req.params.id
-        }
-      });
-      if (!blankData) {
-        res.status(404).json({
-          message: "No tea exist with current ID"
-        });
-        return;
-      }
-      res.status(200).json(blankData);
+      const teaData = await Tea.create();
+      res.status(200).json(teaData);
     } catch (err) {
       res.status(500).json(err);
     }

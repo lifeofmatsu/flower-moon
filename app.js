@@ -6,6 +6,12 @@ require('dotenv').config()
 // Create an Express application
 const app = express();
 
+// Middleware to log information about each incoming request
+app.use((req, res, next) => {
+  console.log(`Received a ${req.method} request for ${req.url}`);
+  next(); // Pass control to the next middleware or route handler
+});
+
 // Set up Handlebars
 app.engine('handlebars', exphbs.engine());
 app.set('view engine', 'handlebars');
