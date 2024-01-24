@@ -1,12 +1,12 @@
 const router = require('express').Router();
-const { tea } = require('../models');
+const { Tea, Cart, CartItem, Orders, OrderItem, User } = require('../models');
 
 router.get('/', async (req, res) => {
     try {
-        const blankData = await tea.findAll({
+        const teaData = await Tea.findAll({
             include: [{}],
         });
-        res.status(200).json(blankData);
+        res.status(200).json(teaData);
     } catch (err) {
         res.status(500).json(err);
     }
@@ -14,16 +14,16 @@ router.get('/', async (req, res) => {
 
 router.get('/tea/:id', async (req, res) => {
     try {
-        const blankData = await tea.findByPk(req.params.id, {
+        const teaData = await Tea.findByPk(req.params.id, {
             include: [{}],
         });
-        if (!blankData) {
+        if (!teaData) {
             res.status(404).json({ 
               message: 'There is no tea with this ID.'
             });
             return;
           }
-        res.status(200).json(blankData);
+        res.status(200).json(teaData);
     } catch (err) {
         res.status(500).json(err);
     }
