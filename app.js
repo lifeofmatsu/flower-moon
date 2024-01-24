@@ -1,6 +1,7 @@
 const express = require('express');
 const exphbs = require('express-handlebars');
 const path = require('path');
+require('dotenv').config()
 
 // Create an Express application
 const app = express();
@@ -20,8 +21,18 @@ app.get('/', (req, res) => {
     res.render('home');
 });
 
+// Stripe Functionality - in progress
+app.request(express.json())
+
+const stripe = require('stripe')(process.env.STRIPE_PRIVATE_KEY)
+
+const storeItems = new Map([
+    [1, {priceInCents: 10000, name: 'Black Tea'}],
+    [2, {}],
+])
+
 // Start the server
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 3001;
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
 });
