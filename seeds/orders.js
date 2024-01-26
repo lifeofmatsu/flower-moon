@@ -1,8 +1,10 @@
 // seeds/orders.js
+const { Orders } = require('../models');
 
-const orders = [
+const ordersList = [
     {
-      userId: 1,
+      id: 1,
+      user_id: 1,
       products: [
         {
           productId: 1,
@@ -17,7 +19,8 @@ const orders = [
       status: "Pending",
     },
     {
-      userId: 2,
+      id: 2,
+      user_id: 2,
       products: [
         {
           productId: 2,
@@ -32,7 +35,8 @@ const orders = [
       status: "Shipped",
     },
     {
-      userId: 3,
+      id: 3,
+      user_id: 3,
       products: [
         {
           productId: 5,
@@ -48,6 +52,9 @@ const orders = [
     },
     
   ];
+
+  const orders = () => Orders.bulkCreate(ordersList);
+
   
   module.exports = orders;
   
