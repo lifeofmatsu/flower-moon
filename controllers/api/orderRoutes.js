@@ -1,10 +1,16 @@
 const router = require('express').Router();
-const { Tea, Orders, Cart } = require('../models');
+const { Tea, Orders, CartItem } = require('../models');
 
 router.get('/', async (req, res) => {
     try {
         const orderData = await Orders.findAll({
-            include: [{ model: Tea, through: CartItem }]
+            include: [{ 
+                model: Tea,
+                through: {
+                    model: CartItem,
+                    unique: false
+                }
+            }]
         });
         res.status(200).json(orderData);
     } catch (err) {
@@ -15,14 +21,20 @@ router.get('/', async (req, res) => {
 router.get('/tea/:id', async (req, res) => {
     try {
         const orderData = await Orders.findByPk(req.params.id, {
-            include: [{ model: Tea, through: CartItem }]
+            include: [{ 
+                model: Tea,
+                through: {
+                    model: CartItem,
+                    unique: false
+                }
+            }]
         });
         if (!orderData) {
             res.status(404).json({ 
-              message: 'There is no tea with this ID.'
+                message: 'There is no tea with this ID.'
             });
             return;
-          }
+        }
         res.status(200).json(orderData);
     } catch (err) {
         res.status(500).json(err);
@@ -31,11 +43,11 @@ router.get('/tea/:id', async (req, res) => {
 
 router.post('/', async (req, res) => {
     try {
-      const orderData = await Orders.create();
-      res.status(200).json(orderData);
+        const orderData = await Orders.create();
+        res.status(200).json(orderData);
     } catch (err) {
-      res.status(500).json(err);
+        res.status(500).json(err);
     }
 });
-  
-  module.exports = router;
+
+module.exports = router;

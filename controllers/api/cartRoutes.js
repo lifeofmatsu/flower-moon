@@ -22,7 +22,7 @@ router.get('/tea/:id', async (req, res) => {
               message: 'There is no tea with this ID.'
             });
             return;
-          }
+        }
         res.status(200).json(cartData);
     } catch (err) {
         res.status(500).json(err);
@@ -31,11 +31,11 @@ router.get('/tea/:id', async (req, res) => {
 
 router.post('/', async (req, res) => {
     try {
-      const cartData = await Cart.create();
-      res.status(200).json(cartData);
+        const cartData = await Cart.create();
+        res.status(200).json(cartData);
     } catch (err) {
-      res.status(500).json(err);
+        res.status(500).json(err);
     }
 });
-  
-  module.exports = router;
+
+module.exports = router;

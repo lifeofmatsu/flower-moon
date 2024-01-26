@@ -6,7 +6,7 @@ router.get('/', async (req, res) => {
         const teaData = await Tea.findAll({
             include: [ Cart, { model: Orders, through: CartItem }]
         });
-        
+
         res.status(200).json(teaData);
     } catch (err) {
         res.status(500).json(err);
@@ -19,15 +19,10 @@ router.get('/tea/:id', async (req, res) => {
             include: [ Cart, { model: Orders, through: CartItem }]
         });
         if (teaData) {
-            res.render('TeaPage', Tea.get({ plain: true }));
-        } else
-        if (!teaData) {
-            res.status(404).json({ 
-            message: 'There is no tea with this ID.'
-        });
-            return;
+            res.render('TeaPage', teaData.get({ plain: true }));
+        } else {
+            res.status(404).json({ message: 'There is no tea with this ID.' });
         }
-        res.status(200).json(teaData);
     } catch (err) {
         res.status(500).json(err);
     }
@@ -35,11 +30,11 @@ router.get('/tea/:id', async (req, res) => {
 
 router.post('/', async (req, res) => {
     try {
-      const teaData = await Tea.create();
-      res.status(200).json(teaData);
+        const teaData = await Tea.create();
+        res.status(200).json(teaData);
     } catch (err) {
-      res.status(500).json(err);
+        res.status(500).json(err);
     }
 });
-  
-  module.exports = router;
+
+module.exports = router;
