@@ -3,79 +3,48 @@ const { Tea, Cart, CartItem, Orders, OrderItem, User } = require('../models');
 const withAuth = require('../utils/auth');
 
 router.get('/', async (req, res) => {
-    try {
-        const teaData = await Tea.findAll({
-            include: [{ 
-            model: User,
-            attributes: ['order'],
-            }],
-        });
-        res.status(200).json(teaData);
-    } catch (err) {
-        res.status(500).json(err);
-    }
+  try {
+    const teaData = await Tea.findAll({ include: [{ model: User, attributes: ['order'] }] });
+    res.status(200).json(teaData);
+  } catch (err) {
+    res.status(500).json(err);
+  }
 });
-// router.get('/tealistings', async (req, res) => {
-//   try {
-//       // const teaData = await Tea.findAll({
-//       //     include: [{ 
-//       //     model: User,
-//       //     attributes: ['order'],
-//       //     }],
-//       // });
-//       res.render("teaListings");
-//   } catch (err) {
-//       res.status(500).json(err);
-//   }
-// });
-
 
 router.get('/tea/:id', async (req, res) => {
-    try {
-        const teaData = await Tea.findByPk(req.params.id, {
-            include: [{
-            model: User,
-            attributes: ['order']
-            }],
-        });
-        if (!teaData) {
-            res.status(404).json({ 
-              message: 'There is no tea with this ID.'
-            });
-            return;
-          }
-        res.status(200).json(teaData);
-    } catch (err) {
-        res.status(500).json(err);
-    }
-});
-
-// Use withAuth middleware to prevent access to route
-router.get('/profile', withAuth, async (req, res) => {
-    try {
-      // Find the logged in user based on the session ID
-      const userData = await User.findByPk(req.session.user_id, {
-        attributes: { exclude: ['password'] },
-        include: [{ model: Tea }],
+  try {
+    const teaData = await Tea.findByPk(req.params.id, { include: [{ model: User, attributes: ['order'] }] });
+    if (!teaData) {
+      res.status(404).json({
+        message: 'There is no tea with this ID.'
       });
-  
-      const user = userData.get({ plain: true });
-  
-      res.render('profile', {
-        ...user,
-        logged_in: true
-      });
-    } catch (err) {
-      res.status(500).json(err);
-    }
-  });
-
-router.get('/login', (req, res) => {
-    if (req.session.logged_in) {
-      res.redirect('/tea');
       return;
     }
-    res.render('login');
+    res.status(200).json(teaData);
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
+router.get('/profile', withAuth, async (req, res) => {
+  try {
+    const userData = await User.findByPk(req.session.user_id, {
+      attributes: { exclude: ['password'] },
+      include: [{ model: Tea }]
+    });
+    const user = userData.get({ plain: true });
+    res.render('profile', { ...user, logged_in: true });
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
+router.get('/login', (req, res) => {
+  if (req.session.logged_in) {
+    res.redirect('/tea');
+    return;
+  }
+  res.render('login');
 });
 
 module.exports = router;
