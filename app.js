@@ -8,7 +8,7 @@ const app = express();
 
 // Middleware to log information about each incoming request
 app.use((req, res, next) => {
-  console.log(`Received a ${req.method} request for ${req.url}`);
+    console.log(`Received a ${req.method} request for ${req.url}`);
   next(); // Pass control to the next middleware or route handler
 });
 
@@ -30,12 +30,12 @@ app.get('/', (req, res) => {
 
 // Stripe Functionality - in progress
 
-const stripe = require('stripe')(process.env.STRIPE_PRIVATE_KEY)
+// const stripe = require('stripe')(process.env.STRIPE_PRIVATE_KEY);
 
-const storeItems = new Map([
-    [1, {priceInCents: 10000, name: 'Black Tea'}],
-    [2, {}],
-])
+// const storeItems = new Map([
+//     [1, {priceInCents: 1000, name: 'Black Tea'}],
+//     [2, {priceInCents: 2200, name: 'Matcha'}],
+// ]);
 
 // Start the server
 const PORT = process.env.PORT || 3001;
