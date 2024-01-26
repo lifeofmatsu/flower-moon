@@ -20,6 +20,7 @@ app.set('views', path.join(__dirname, 'views'));
 // Serve static files from the "public" directory
 app.use(express.static(path.join(__dirname, 'public')));
 // app.use(express.static('public'));
+app.use(express.json())
 
 
 // Define a route to render the home page
@@ -28,7 +29,6 @@ app.get('/', (req, res) => {
 });
 
 // Stripe Functionality - in progress
-app.request(express.json())
 
 const stripe = require('stripe')(process.env.STRIPE_PRIVATE_KEY)
 

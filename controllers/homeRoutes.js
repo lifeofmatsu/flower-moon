@@ -15,6 +15,20 @@ router.get('/', async (req, res) => {
         res.status(500).json(err);
     }
 });
+// router.get('/tealistings', async (req, res) => {
+//   try {
+//       // const teaData = await Tea.findAll({
+//       //     include: [{ 
+//       //     model: User,
+//       //     attributes: ['order'],
+//       //     }],
+//       // });
+//       res.render("teaListings");
+//   } catch (err) {
+//       res.status(500).json(err);
+//   }
+// });
+
 
 router.get('/tea/:id', async (req, res) => {
     try {
