@@ -1,7 +1,6 @@
 // Require the sequelize instance from the config/connection module
 const orders = require('./orders');
 const teaCategories = require('./tea-categories');
-const teaProducts = require('./tea-products');
 const users = require('./users');
 // Require the sequelize instance from the config/connection module
 const sequelize = require('../config/connection');
