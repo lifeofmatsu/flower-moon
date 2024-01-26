@@ -1,14 +1,23 @@
 const router = require('express').Router();
 const { User } = require('../../models');
+const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
+
+// Function to generate JWT
+const generateToken = (user) => {
+  return jwt.sign({ id: user.id, email: user.email }, 'your-secret-key', { expiresIn: '1h' });
+};
 
 router.post('/', async (req, res) => {
   try {
-    const userData = await User.create(req.body);
-    req.session.user_id = userData.id;
-    req.session.logged_in = true;
-    req.session.save(() => {
-      res.status(200).json(userData);
-    });
+    // Hash the password before saving it to the database
+    const hashedPassword = await bcrypt.hash(req.body.password, 10);
+    const userData = await User.create({ ...req.body, password: hashedPassword });
+
+    // Generate and send JWT as a response
+    const token = generateToken(userData);
+    
+    res.status(200).json({ user: userData, token });
   } catch (err) {
     res.status(400).json(err);
   }
@@ -23,20 +32,17 @@ router.post('/login', async (req, res) => {
       return;
     }
 
-    const validPassword = await userData.checkPassword(req.body.password);
+    const validPassword = await bcrypt.compare(req.body.password, userData.password);
 
     if (!validPassword) {
       res.status(400).json({ message: 'Incorrect email or password, please try again' });
       return;
     }
 
-    req.session.user_id = userData.id;
-    req.session.logged_in = true;
-
-    req.session.save(() => {
-      res.json({ user: userData, message: 'You are now logged in!' });
-    });
-
+    // Generate and send JWT as a response
+    const token = generateToken(userData);
+    
+    res.json({ user: userData, token, message: 'You are now logged in!' });
   } catch (err) {
     res.status(400).json(err);
   }
