@@ -13,12 +13,12 @@ const categoryData = [
     },
     {
       id: 2,
-      name: "Black Tea",
-      category: "Black",
+      name: "Pink Tea",
+      category: "Pink",
       price: 10.00,
       sold: false,
       description: "Fully oxidized teas with rich and bold flavors",
-      image: "black_tea_category.jpg",
+      image: "pink_tea_category.jpg",
     },
     {
       id: 3,
