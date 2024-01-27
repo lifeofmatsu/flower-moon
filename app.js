@@ -3,6 +3,8 @@ const exphbs = require('express-handlebars');
 const path = require('path');
 require('dotenv').config()
 
+const routes = require ('./controllers');
+
 // Create an Express application
 const app = express();
 
@@ -22,11 +24,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 // app.use(express.static('public'));
 app.use(express.json())
 
-
-// Define a route to render the home page
-app.get('/', (req, res) => {
-    res.render('home');
-});
+app.use(routes)
 
 // Stripe Functionality - in progress
 
