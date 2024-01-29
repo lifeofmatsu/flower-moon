@@ -14,8 +14,6 @@ router.get('/', async (req, res) => {
     }
 });
 
-module.exports = router;
-
 // router.get('/tea/:id', async (req, res) => {
 //     try {
 //         const cartData = await Cart.findByPk(req.params.id, {
