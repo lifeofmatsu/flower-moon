@@ -16,7 +16,12 @@ app.use((req, res, next) => {
 });
 
 // Set up Handlebars
-app.engine('handlebars', exphbs.engine());
+const hbs = exphbs.create({
+  // Specify configurations if any
+  partialsDir: 'views/partials/'
+});
+
+app.engine('handlebars', hbs.engine());
 app.set('view engine', 'handlebars');
 app.set('views', path.join(__dirname, 'views'));
 
