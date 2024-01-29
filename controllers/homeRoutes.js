@@ -2,14 +2,14 @@ const router = require('express').Router();
 // const { Tea, Cart, CartItem, Orders, OrderItem, User } = require('../models');
 // const withAuth = require('../utils/auth');
 
-// router.get('/', async (req, res) => {
-//   try {
-//     const teaData = await Tea.findAll({ include: [{ model: User, attributes: ['order'] }] });
-//     res.status(200).json(teaData);
-//   } catch (err) {
-//     res.status(500).json(err);
-//   }
-// });
+router.get('/', async (req, res) => {
+  try {
+    const teaData = await Tea.findAll({ include: [{ model: User, attributes: ['order'] }] });
+    res.status(200).json(teaData);
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
 
 // router.get('/tea/:id', async (req, res) => {
 //   try {
