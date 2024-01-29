@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const { Tea, Cart, Orders } = require('../models');
+const { Tea, Cart } = require('../models');
 
 router.get('/', async (req, res) => {
     console.log('Handling GET /cart');
