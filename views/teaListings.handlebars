@@ -1,32 +1,31 @@
-{{!-- Template for tea product listing e.g., the formal page for user to view all the details of a single product. --}}
+{{> header }}
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<main class="product-page">
+    <section class="container">
+        <div class="product-details">
+            <div class="product-image">
+                <!-- Product image -->
+                <img src="{{product.imageUrl}}" alt="{{product.name}}" style="height: 66vh;">
+            </div>
+            <div class="product-description">
+                <p class="origin">{{product.origin}}</p>
+                <h2 class="name">{{product.name}}</h2>
+                <p class="rating">{{product.rating}}</p>
+                <p class="price">{{product.price}}</p>
+                <!-- Quantity button, Add to cart button, and product descriptions -->
+            </div>
+        </div>
 
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300..700&display=swap" rel="stylesheet">
-    
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet"> 
+        <div class="customer-reviews">
+            <h2>Verified Customer Reviews</h2>
+            <button>Write a review</button>
+            <!-- Customer reviews -->
+        </div>
+    </section>
 
-    <link rel="stylesheet" href="/public/css/style.css">
+    {{> recommended }}
 
-    <title>Flower & Moon Tea</title>
-</head>
-<body>
-    {{#with teaDetails}}
-    <div class="container">
-        <h1>{{name}}</h1>
-        <img src="{{imageUrl}}" alt="{{name}}" style="max-width: 100%; height: auto;">
-        <p>{{description}}</p>
-        <p>Price: ${{price}}</p>
-        <button onclick="addToCart('{{id}}')">Add to cart</button>
-    </div>
-    {{/with}}
-</body>
-</html>
+</main>
+
+{{> footer }}
+
