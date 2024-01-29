@@ -24,10 +24,7 @@ router.get('/tea/:id', async (req, res) => {
         const orderData = await Orders.findByPk(req.params.id, {
             include: [{ 
                 model: Tea,
-                through: {
-                    model: CartItem,
-                    unique: false
-                }
+                through: CartItem // removed unnecessary options
             }]
         });
         if (!orderData) {
