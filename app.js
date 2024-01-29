@@ -16,9 +16,14 @@ const app = express();
 // });
 
 // Set up Handlebars
-// app.engine('handlebars', exphbs.engine());
-// app.set('view engine', 'handlebars');
-// app.set('views', path.join(__dirname, 'views'));
+const hbs = exphbs.create({
+  // Specify configurations if any
+  partialsDir: 'views/partials/'
+});
+
+app.engine('handlebars', hbs.engine());
+app.set('view engine', 'handlebars');
+app.set('views', path.join(__dirname, 'views'));
 
 // // Serve static files from the "public" directory
 // app.use(express.static(path.join(__dirname, 'public')));
