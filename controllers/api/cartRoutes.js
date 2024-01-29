@@ -3,15 +3,18 @@ const { Tea, Cart } = require('../models');
 
 router.get('/', async (req, res) => {
     console.log('Handling GET /cart');
-     try {
+    try {
         const cartData = await Cart.findAll({
-            include: [{ model: Tea }]
+            include: Tea
         });
         res.status(200).json(cartData);
     } catch (err) {
+        console.log(err);
         res.status(500).json(err);
     }
 });
+
+module.exports = router;
 
 // router.get('/tea/:id', async (req, res) => {
 //     try {
@@ -32,8 +35,8 @@ router.get('/', async (req, res) => {
 
 router.post('/', async (req, res) => {
     console.log('Handling POST /');
-      try {
-        const cartData = await Cart.create();
+    try {
+        const cartData = await Cart.create({});
         res.status(200).json(cartData);
     } catch (err) {
         res.status(500).json(err);
