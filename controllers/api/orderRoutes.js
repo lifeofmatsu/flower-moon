@@ -14,6 +14,7 @@ router.get('/', async (req, res) => {
         });
         res.status(200).json(orderData);
     } catch (err) {
+        console.error(err);
         res.status(500).json(err);
     }
 });
@@ -44,7 +45,8 @@ router.get('/tea/:id', async (req, res) => {
 router.post('/', async (req, res) => {
     try {
         const orderData = await Orders.create();
-        res.status(200).json(orderData);
+        res.status(200).json({ message: 'Order created successfully', order: orderData });
+
     } catch (err) {
         res.status(500).json(err);
     }
