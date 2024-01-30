@@ -45,14 +45,14 @@ router.get('/home', (req, res) => {
   res.sendFile(path.join(__dirname, '../views/home.handlebars'));
 });
 
-router.get('/profile', async (req, res) => {
+router.get('/users', async (req, res) => {
   try {
     const userData = await User.findByPk(req.session.user_id, {
       attributes: { exclude: ['password'] },
       include: [{ model: Tea }],
     });
     const user = userData.get({ plain: true });
-    res.render('profile', { ...user, logged_in: true });
+    res.render('users', { ...user, logged_in: true });
   } catch (err) {
     res.status(500).json(err);
   }

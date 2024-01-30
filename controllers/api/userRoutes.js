@@ -1,49 +1,97 @@
 const router = require('express').Router();
-const { User, Tea } = require('../../models');
-const bcrypt = require('bcrypt');
-const jwt = require('jsonwebtoken');
+const { User } = require('../../models');
+//const bcrypt = require('bcrypt');
+//const jwt = require('jsonwebtoken');
 
 // Function to generate JWT
-const generateToken = (user) => {
-  return jwt.sign({ id: user.id, email: user.email }, 'your-secret-key', { expiresIn: '1h' });
-};
+//const generateToken = (user) => {
+  //return jwt.sign({ id: user.id, email: user.email }, 'your-secret-key', { expiresIn: '1h' });
+//};
 
-router.get('/', async (req, res) => {
-  try {
-    const teaData = await Tea.findAll({ include: [{ model: User, attributes: ['cart','order'] }] });
-    res.status(200).json(teaData);
-  } catch (err) {
-    res.status(500).json(err);
-  }
-});
+//router.get('/', async (req, res) => {
+  //try {
+   // const teaData = await Tea.findAll({ include: [{ model: User, attributes: ['cart','order'] }] });
+   // res.status(200).json(teaData);
+  //} catch (err) {
+   // res.status(500).json(err);
+  //}
+//});
+
+//router.post('/', async (req, res) => {
+  //try {
+    //const hashedPassword = await bcrypt.hash(req.body.password, 10);
+    //const userData = await User.create({ ...req.body, password: hashedPassword });
+    //const token = generateToken(userData);
+    //res.status(200).json({ user: userData, token });
+  //} catch (err) {
+    //res.status(400).json({ error: err.message });
+  //}
+//});
+
+//router.post('/login', async (req, res) => {
+  //try {
+   // const userData = await User.findOne({ where: { email: req.body.email } });
+    //if (!userData) {
+    //  res.status(400).json({ message: 'Incorrect email or password, please try again' });
+    //  return;
+   // }
+   // const validPassword = await bcrypt.compare(req.body.password, userData.password);
+   // if (!validPassword) {
+    //  res.status(400).json({ message: 'Incorrect email or password, please try again' });
+    //  return;
+    //}
+    //const token = generateToken(userData);
+    //res.json({ user: userData, token, message: 'You are now logged in!' });
+  //} catch (err) {
+  //  res.status(400).json({ error: err.message });
+  //}
+//});
 
 router.post('/', async (req, res) => {
   try {
-    const hashedPassword = await bcrypt.hash(req.body.password, 10);
-    const userData = await User.create({ ...req.body, password: hashedPassword });
-    const token = generateToken(userData);
-    res.status(200).json({ user: userData, token });
+    const userData = await User.create({
+      username: req.body.username,
+      email: req.body.email,
+      password: req.body.password,
+    });
+    //req.session.user_id = userData.id;
+    //req.session.logged_in = true;
+    req.session.save(() => {
+      req.session.logged_in = true;
+      res.status(200).json(userData);
+    });
   } catch (err) {
-    res.status(400).json({ error: err.message });
+    res.status(400).json(err);
   }
 });
 
 router.post('/login', async (req, res) => {
   try {
     const userData = await User.findOne({ where: { email: req.body.email } });
+
     if (!userData) {
       res.status(400).json({ message: 'Incorrect email or password, please try again' });
       return;
     }
-    const validPassword = await bcrypt.compare(req.body.password, userData.password);
+
+    const validPassword = await userData.checkPassword(req.body.password);
+
     if (!validPassword) {
       res.status(400).json({ message: 'Incorrect email or password, please try again' });
       return;
     }
-    const token = generateToken(userData);
-    res.json({ user: userData, token, message: 'You are now logged in!' });
+
+    //req.session.user_id = userData.id;
+    //req.session.logged_in = true;
+
+    req.session.save(() => {
+      req.session.user_id = userData.id;
+      req.session.logged_in = true;
+      res.status(200).json({ user: userData, message: 'You are now logged in!' });
+    });
+
   } catch (err) {
-    res.status(400).json({ error: err.message });
+    res.status(400).json(err);
   }
 });
 
