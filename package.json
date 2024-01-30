@@ -12,9 +12,6 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "engines": {
-    "node": "14.x"
-  },
   "dependencies": {
     "connect-session-sequelize": "^7.1.7",
     "dotenv": "^16.4.1",
