@@ -1,16 +1,13 @@
 const express = require('express');
 const exphbs = require('express-handlebars');
-const { Sequelize } = require('sequelize');
 const Stripe = require('stripe');
-
+const session = require('express-session');
+const SequelizeStore = require('connect-session-sequelize')(session.Store);
 const path = require('path');
 const sequelize = require('./config/connection');
 require('dotenv').config();
 const routes = require('./controllers');
 
-//set up sessions with cookies
-// const session = require('express-session');
-// const SequelizeStore = require('connect-session-sequelize')(session.Store);
 
 const stripe = Stripe();
 
@@ -31,11 +28,9 @@ const sess = {
   }),
 };
 
-app.use(session(sess));
-
 // Create an Express application
 const app = express();
-// app.use(session(sess));
+app.use(session(sess));
 // Middleware to log information about each incoming request
 app.use((req, res, next) => {
     console.log(`Received a ${req.method} request for ${req.url}`);
