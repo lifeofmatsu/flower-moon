@@ -13,6 +13,9 @@ router.get('/', async (req, res) => {
 });
 
 router.get('/tea/:id', async (req, res) => {
+  if (!req.session.loggedIn) {
+    res.redirect('/login');
+  }
   try {
     const teaData = await Tea.findByPk(req.params.id, {
       include: [{ model: Cart, through: CartItem }, { model: Orders, through: CartItem }]
