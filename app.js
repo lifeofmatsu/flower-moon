@@ -2,6 +2,7 @@ const express = require('express');
 const exphbs = require('express-handlebars');
 const path = require('path');
 const { Sequelize } = require('sequelize');
+const sequelize = require('./config/connection');
 require('dotenv').config();
 const routes = require('./controllers');
 
@@ -24,10 +25,9 @@ const sess = {
   }),
 };
 
-app.use(session(sess));
-
 // Create an Express application
 const app = express();
+app.use(session(sess));
 // Middleware to log information about each incoming request
 app.use((req, res, next) => {
     console.log(`Received a ${req.method} request for ${req.url}`);
@@ -45,10 +45,10 @@ app.use(express.static('public'));
 app.use(express.json());
 
 // Set up Sequelize
-const sequelize = new Sequelize(process.env.DB_NAME, process.env.DB_USER, process.env.DB_PASSWORD, {
-  host: process.env.DB_HOST,
-  dialect: 'mysql',
-});
+//const sequelize = new Sequelize(process.env.DB_NAME, process.env.DB_USER, process.env.DB_PASSWORD, {
+ // host: process.env.DB_HOST,
+  //dialect: 'mysql',
+//});
 // Load models
 const { Tea, Cart, Orders } = require('./models'); // Adjust the path based on your project structure
 

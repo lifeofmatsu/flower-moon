@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const { User } = require('../../models');
+const { User, Tea } = require('../../models');
 //const bcrypt = require('bcrypt');
 //const jwt = require('jsonwebtoken');
 
@@ -8,14 +8,15 @@ const { User } = require('../../models');
   //return jwt.sign({ id: user.id, email: user.email }, 'your-secret-key', { expiresIn: '1h' });
 //};
 
-//router.get('/', async (req, res) => {
-  //try {
-   // const teaData = await Tea.findAll({ include: [{ model: User, attributes: ['cart','order'] }] });
-   // res.status(200).json(teaData);
-  //} catch (err) {
-   // res.status(500).json(err);
-  //}
-//});
+// router.get('/', async (req, res) => {
+//   try {
+//    const teaData = await Tea.findAll({ include: [{ model: User, attributes: ['cart','order'] }] });
+//    res.status(200).json(teaData);
+//   } catch (err) {
+//     console.log(err);
+//    res.status(500).json(err);
+//   }
+// });
 
 //router.post('/', async (req, res) => {
   //try {
