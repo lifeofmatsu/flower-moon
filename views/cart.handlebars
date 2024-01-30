@@ -1,0 +1,39 @@
+{{> header }}
+
+<main class="cart-page">
+    <h2>CART</h2>
+    <a href="/tea">Continue shopping</a>
+
+    {{#if cartItems.length}}
+        <div class="cart-content">
+            <div class="cart-items" style="width: 57%;">
+                {{#each cartItems as |item|}}
+                    <div class="cart-item">
+                        <div class="product-image">
+                            <img src="{{item.imageUrl}}" alt="{{item.name}}" style="width: 100px; height: 100px;">
+                        </div>
+                        <div class="product-details">
+                            <h3>{{item.name}}</h3>
+                            <p>Quantity: {{item.quantity}}</p>
+                            <button>-</button><button>+</button>
+                        </div>
+                        <div class="product-price">
+                            ${{item.price}}
+                        </div>
+                    </div>
+                {{/each}}
+            </div>
+            <div class="cart-summary" style="width: 43%; background-color: #darkerShade;">
+                <p>Order Note</p>
+                <textarea placeholder="Enter your note here" rows="2"></textarea>
+                <p>Subtotal: ${{cart.total}}</p>
+                <button>Check Out</button>
+                <small>Shipping, taxes, and discount codes calculated at checkout.</small>
+            </div>
+        </div>
+    {{else}}
+        <p>Your cart is currently empty.</p>
+    {{/if}}
+</main>
+
+{{> footer }}
