@@ -56,7 +56,7 @@ Have a quality README (with unique name, description, technologies used, screens
 
 Clone the repo from GitHub and open the intergrated terminal once installed. Then, enter "npm i" to make sure all dependencies are installed. 
 
-GitHub Repo - https://github.com/lifeofmatsu/flower-moon-tea/
+GitHub Repo - https://github.com/asierra619/flower-moon-tea/
 
 ## Usage
 
