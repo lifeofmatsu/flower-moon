@@ -1,13 +1,18 @@
 const express = require('express');
 const exphbs = require('express-handlebars');
-const path = require('path');
 const { Sequelize } = require('sequelize');
-require('dotenv').config();
+const Stripe = require('stripe');
+
+const path = require('path');
 const routes = require('./controllers');
 
 //set up sessions with cookies
 const session = require('express-session');
 const SequelizeStore = require('connect-session-sequelize')(session.Store);
+
+const stripe = Stripe();
+
+require('dotenv').config();
 
 const sess = {
   secret: 'Super secret secret',
@@ -57,12 +62,9 @@ const { Tea, Cart, Orders } = require('./models'); // Adjust the path based on y
 // Cart.associate(models);
 // Orders.associate(models);
 app.use(routes);
-// Stripe Functionality - in progress
-// const stripe = require('stripe')(process.env.STRIPE_PRIVATE_KEY);
-// const storeItems = new Map([
-//     [1, {priceInCents: 1000, name: 'Black Tea'}],
-//     [2, {priceInCents: 2200, name: 'Matcha'}],
-// ]);
+
+
+
 // Start the server
 const PORT = process.env.PORT || 3001;
 // Sync sequelize models to the database, then turn on the server

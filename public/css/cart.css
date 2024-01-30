@@ -1,0 +1,39 @@
+.cart-page {
+    text-align: center;
+}
+
+.cart-content {
+    display: flex;
+    justify-content: space-between;
+    padding: 20px;
+}
+
+.cart-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 10px;
+    border-bottom: 1px solid #ccc;
+}
+
+.product-image img {
+    /* Adjust as needed */
+}
+
+.product-details {
+    /* Adjust as needed */
+}
+
+.product-price {
+    /* Adjust as needed */
+}
+
+.cart-summary {
+    /* Adjust as needed */
+    padding: 20px;
+}
+
+.cart-summary textarea {
+    width: 100%;
+    margin-bottom: 10px;
+}
