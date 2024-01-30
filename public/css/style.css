@@ -104,6 +104,10 @@ HEADER NAVIGATION
     place-self: center;
 }
 
+.banner-background {
+    width: 100%;
+}
+
 .nav-pane {
     display: grid;
     grid-template-columns: repeat(6, 1fr);
