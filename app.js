@@ -31,21 +31,19 @@ const app = express();
 // Middleware to log information about each incoming request
 app.use((req, res, next) => {
     console.log(`Received a ${req.method} request for ${req.url}`);
-    next();
-    app.use((err, req, res, next) => {
-      console.error(err.stack);
-      res.status(500).send('Something went wrong!');
-    });
-    // Pass control to the next middleware or route handler
+    next(); // Pass control to the next middleware or route handler
 });
+
 // Set up Handlebars
 app.engine('handlebars', exphbs.engine({
   partialsDir: 'views/partials/'
 }));
 app.set('view engine', 'handlebars');
 // // Serve static files from the "public" directory
-app.use(express.json());
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static('public'));
+app.use(express.json());
+
 // Set up Sequelize
 const sequelize = new Sequelize(process.env.DB_NAME, process.env.DB_USER, process.env.DB_PASSWORD, {
   host: process.env.DB_HOST,
@@ -53,6 +51,7 @@ const sequelize = new Sequelize(process.env.DB_NAME, process.env.DB_USER, proces
 });
 // Load models
 const { Tea, Cart, Orders } = require('./models'); // Adjust the path based on your project structure
+
 // Associate models if needed
 // Tea.associate(models);
 // Cart.associate(models);

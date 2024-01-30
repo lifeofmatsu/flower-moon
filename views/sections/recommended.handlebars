@@ -1,0 +1,15 @@
+<div class="trending-tea">
+    <div class="trending-tea--grid">
+        {{#each teas as |tea|}}
+            <div class="trending-tea__item">
+                <a class="trending-tea__link" href="/product/{{tea.id}}">
+                    <img src="{{tea.imageUrl}}" alt="{{tea.name}}">
+                    <h3>{{tea.name}}</h3>
+                    <p>{{tea.origin}}</p>
+                    <h3>${{tea.price}} USD</h3>
+                </a>
+                <button class="button" onclick="event.stopPropagation(); addToCart('{{tea.id}}')">Add to cart</button>
+            </div>
+        {{/each}}
+    </div>
+</div>
