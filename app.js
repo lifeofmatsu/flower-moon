@@ -7,27 +7,27 @@ require('dotenv').config();
 const routes = require('./controllers');
 
 //set up sessions with cookies
-const session = require('express-session');
-const SequelizeStore = require('connect-session-sequelize')(session.Store);
+// const session = require('express-session');
+// const SequelizeStore = require('connect-session-sequelize')(session.Store);
 
-const sess = {
-  secret: 'Super secret secret',
-  cookie: {
-    maxAge: 24 * 60 * 60 * 1000,
-    httpOnly: true,
-    secure: false,
-    sameSite: 'strict',
-  },
-  resave: false,
-  saveUnintialized: true,
-  store: new SequelizeStore({
-    db: sequelize,
-  }),
-};
+// const sess = {
+//   secret: 'Super secret secret',
+//   cookie: {
+//     maxAge: 24 * 60 * 60 * 1000,
+//     httpOnly: true,
+//     secure: false,
+//     sameSite: 'strict',
+//   },
+//   resave: false,
+//   saveUnintialized: true,
+//   store: new SequelizeStore({
+//     db: sequelize,
+//   }),
+// };
 
 // Create an Express application
 const app = express();
-app.use(session(sess));
+// app.use(session(sess));
 // Middleware to log information about each incoming request
 app.use((req, res, next) => {
     console.log(`Received a ${req.method} request for ${req.url}`);
