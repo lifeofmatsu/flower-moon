@@ -1,0 +1,18 @@
+{{> header }}
+
+<main class="teaware-page">
+    <h1>Our Teaware Collection</h1>
+    <div class="teaware-items">
+        <!-- Placeholder for dynamic teaware items -->
+        {{#each teawareItems}}
+        <div class="teaware-item">
+            <img src="{{this.imageUrl}}" alt="{{this.name}}">
+            <h2>{{this.name}}</h2>
+            <p>{{this.description}}</p>
+            <p>Price: ${{this.price}}</p>
+        </div>
+        {{/each}}
+    </div>
+</main>
+
+{{> footer }}

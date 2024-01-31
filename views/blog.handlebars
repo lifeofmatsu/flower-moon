@@ -1,0 +1,17 @@
+{{> header }}
+
+<main class="blog-page">
+    <h1>Blog</h1>
+    <div class="blog-posts">
+        <!-- Placeholder for dynamic blog posts -->
+        {{#each blogPosts}}
+        <div class="blog-post">
+            <h2>{{this.title}}</h2>
+            <p>{{this.summary}}</p>
+            <a href="/blog/{{this.slug}}">Read more</a>
+        </div>
+        {{/each}}
+    </div>
+</main>
+
+{{> footer }}

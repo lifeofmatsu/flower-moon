@@ -1,0 +1,18 @@
+{{> header }}
+
+<main class="events-page">
+    <h1>Upcoming Events</h1>
+    <div class="event-list">
+        <!-- Placeholder for dynamic list of events -->
+        {{#each events}}
+        <div class="event">
+            <h2>{{this.title}}</h2>
+            <p>{{this.date}}</p>
+            <p>{{this.location}}</p>
+            <p>{{this.description}}</p>
+        </div>
+        {{/each}}
+    </div>
+</main>
+
+{{> footer }}
