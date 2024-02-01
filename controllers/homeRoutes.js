@@ -31,7 +31,7 @@ router.get('/', async (req, res) => {
   try {
     const teaData = await Tea.findAll();
     const teas = teaData.map(teaListing => teaListing.get({ plain: true }));
-
+    console.log("HOME",teas)
     res.render('home', {
       teaData: teas
     });
@@ -41,10 +41,17 @@ router.get('/', async (req, res) => {
   }
 });
 
-router.get('/home', (req, res) => {
-  res.sendFile(path.join(__dirname, '../views/home.handlebars'));
-});
+// router.get('/home', (req, res) => {
+//   res.sendFile(path.join(__dirname, '../views/home.handlebars'));
+// });
 
+router.get("/tea",(req,res) => {
+  res.render("teaListings")
+})
+
+router.get("/user",(req,res) => {
+  res.render("login")
+})
 router.get('/users', async (req, res) => {
   try {
     const userData = await User.findByPk(req.session.user_id, {

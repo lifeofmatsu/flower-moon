@@ -8,11 +8,27 @@
         </div>
     </section>
     <div class="featured-product">
+        {{#each teaData as |tea|}}
+        <div class="row mb-4 project">
+            <div class="col-md-5">
+                <h2>
+                    <!-- Call helper function with triple brackets to render the emoji span as HTML -->
+                    {{{tea.id}}}
+                    {{tea.name}}
+                    {{tea.category}}
+                    {{tea.price}}
+                    {{tea.sold}}
+                    {{tea.description}}
+                </h2>
+                
+              <img src={{tea.image}} />
 
+            </div>
+        
+        </div>
+        {{/each}}
     </div>
     <div class="featured-blog-post">
 
     </div>
 </main>
-
-
